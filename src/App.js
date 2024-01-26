@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Documentos from './Components/Documentos/Documentos';
+import Datos from './Components/Datos/Datos';
+import Lector from './Components/Lector/Lector';
 
 function App() {
+  const [documento, setDocumento] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [email, setEmail] = useState('');
+  const [redirect, setRedirect] = useState(false);
+
+  const handleRedirect = (e) => {
+    e.preventDefault();
+    if (documento && nombre && email) {
+      setRedirect(true);
+    } else {
+      alert('Por favor, completa todos los campos');
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Documentos setDocumento={setDocumento} handleRedirect={handleRedirect} />} />
+        <Route path="/datos" element={<Datos setNombre={setNombre} setEmail={setEmail} />} />
+        <Route path="/lector" element={<Lector setDocumento={setDocumento} />} />
+        {redirect && <Navigate to="/datos" />}
+      </Routes>
+    </Router>
   );
 }
 
