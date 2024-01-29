@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Datos.css';
 
 const Datos = () => {
+
+    const navigate = useNavigate();
+
     const [nombreValue, setNombreValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
-    const navigate = useNavigate();
 
     const handleNombreChange = (event) => {
         setNombreValue(event.target.value);
@@ -16,12 +18,7 @@ const Datos = () => {
     };
 
     const handleNextClick = () => {
-        if (nombreValue.trim() !== '' && emailValue.trim() !== '') {
-            // Aquí podrías realizar alguna acción con los datos antes de la redirección
-            navigate('/lector');
-        } else {
-            alert('Por favor, completa todos los campos');
-        }
+        navigate('/lector');
     };
 
     return (
