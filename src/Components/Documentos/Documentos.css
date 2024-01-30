@@ -56,12 +56,13 @@
     margin-left: 80px;
     width: 60%;
     height: 40px;
-    background: rgb(236, 132, 32);
+    background: #E6E6E6;
     border: none;
-    border-radius: 5px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    color: aliceblue;
-    font-size: 30px;
+    margin-top: 150px;
+    margin-bottom: 30px;
+    margin-left: 80px;
+    width: 60%;
+    height: 40px;
     
 }
 

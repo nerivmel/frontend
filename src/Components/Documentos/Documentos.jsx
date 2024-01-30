@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import './Documentos.css';
+import { fetchPersona } from "../../api/api";
 
 const Documentos = () => {
-    const [documentoValue, setDocumentoValue] = useState('');
-    const [numeroDocumentoValue, setNumeroDocumentoValue] = useState('');
+    const [docTypeValue, setDocumentoValue] = useState('');
+    const [docNumberValue, setNumeroDocumentoValue] = useState('');
     const navigate = useNavigate();
 
     const handleDocumentoChange = (event) => {
@@ -16,28 +17,22 @@ const Documentos = () => {
     };
 
     const handleNextClick = async (e) => {
-        e.preventDefault()
-        if (documentoValue.trim() === '') {
-            alert('Por favor, seleccione un tipo de documento');
-            return;
-        }
-        if (numeroDocumentoValue.trim() === '') {
-            alert('Por favor, ingrese el número de documento');
-            return;
-        }
-     
+        e.preventDefault();
+
         try {
-            const response = await fetch(`http://localhost:8080/persons?doc=${numeroDocumentoValue}&docType=${documentoValue}`);
-            console.log(response)
-            if (response.ok) {
-                const data = await response.json();
-                navigate('/datos') 
-            } else {
-                throw new Error('Credenciales inválidas');
+            if (docNumberValue.trim() === '' || docTypeValue.trim() === '') {
+                alert('Por favor, ingrese un tipo y número de documento');
+                return;
             }
+
+            const data = await fetchPersona(docTypeValue,docNumberValue);
+            const queryParams = new URLSearchParams();
+            queryParams.append('name', data.name);
+            queryParams.append('email', data.email);
+            navigate(`/datos?${queryParams.toString()}`);
         } catch (error) {
-            console.error('Error al realizar la solicitud:', error);
-            alert('Error al realizar la solicitud: ' + error.message);
+            console.error('Error al obtener los datos:', error);
+            alert('Error al obtener los datos: ' + error.message);
         }
     };
 
@@ -52,7 +47,7 @@ const Documentos = () => {
                 <img src="./images/recurso 3.png" alt="" className="parati"/>
                 <label className="labeltype" htmlFor="Tipo de documento">Tipo de Documento</label>
                 <div className="input-box">
-                <select name="select" value={documentoValue} onChange={handleDocumentoChange}>
+                <select name="select" value={docTypeValue} onChange={handleDocumentoChange}>
                         <option value="">Seleccione un tipo de documento</option>
                         <option value="CÉDULA DE CIUDADANÍA">CÉDULA DE CIUDADANÍA</option>
                         <option value="CÉDULA EXTRANJERÍA COLOMBIANA">CÉDULA EXTRANJERÍA COLOMBIANA</option>
@@ -64,7 +59,7 @@ const Documentos = () => {
                 </div>
                 <label className="labeldoc" htmlFor="Numero de documento">Número de Documento</label>
                 <div className="input-box">
-                    <input type="text" value={numeroDocumentoValue} onChange={handleNumeroDocumentoChange} placeholder="número de documento" required />
+                    <input type="text" value={docNumberValue} onChange={handleNumeroDocumentoChange} placeholder="número de documento" required />
                 </div>
 
                 <button type="submit" className="siguiente">
