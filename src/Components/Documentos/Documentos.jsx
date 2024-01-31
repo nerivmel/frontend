@@ -18,24 +18,36 @@ const Documentos = () => {
 
     const handleNextClick = async (e) => {
         e.preventDefault();
-
-        try {
+    
+        
             if (docNumberValue.trim() === '' || docTypeValue.trim() === '') {
                 alert('Por favor, ingrese un tipo y número de documento');
                 return;
             }
 
-            const data = await fetchPersona(docTypeValue,docNumberValue);
-            const queryParams = new URLSearchParams();
-            queryParams.append('name', data.name);
-            queryParams.append('email', data.email);
-            navigate(`/datos?${queryParams.toString()}`);
-        } catch (error) {
+            
+        try {
+            const data = await fetchPersona(docTypeValue, docNumberValue);
+
+            if (data) {
+                const queryParams = new URLSearchParams();
+                queryParams.append('name', data.name);
+                queryParams.append('email', data.email);
+                navigate(`/datos?${queryParams.toString()}`);
+                
+            } else {
+                const queryParams = new URLSearchParams();
+                sessionStorage.setItem('docNumberValue', docNumberValue);
+                sessionStorage.setItem('docTypeValue', docTypeValue);
+                navigate(`/datos?${queryParams.toString()}`);
+            }
+        } catch (error) { 
             console.error('Error al obtener los datos:', error);
             alert('Error al obtener los datos: ' + error.message);
         }
     };
-
+    
+    
     return (
         <div className="wrapper">
             <form onSubmit={handleNextClick}>

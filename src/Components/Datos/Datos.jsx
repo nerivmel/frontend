@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { fetchRegistro } from "../../api/api";
 import './Datos.css';
 
 const Datos = () => {
@@ -8,6 +9,8 @@ const Datos = () => {
 
     const [nombreValue, setNombreValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
+    const [docType, setDocType] = useState(''); 
+    const [docNumber, setDocNumber] = useState(''); 
 
     useEffect(() => {
         const obtenerDatosUrl = () => {
@@ -15,6 +18,7 @@ const Datos = () => {
                 const searchParams = new URLSearchParams(location.search);
                 const nombre = searchParams.get('name');
                 const email = searchParams.get('email');
+    
                 if (nombre && email) {
                     const nombreTransformado = transformarNombre(nombre);
                     const emailTransformado = transformarEmail(email);
@@ -25,7 +29,7 @@ const Datos = () => {
                 console.error('Error al obtener los datos de la URL:', error);
             }
         };
-
+    
         obtenerDatosUrl();
     }, [location.search]);
 
@@ -42,7 +46,7 @@ const Datos = () => {
     };
     
     const transformarEmail = (texto) => {
-        const partes = texto.split('@'); 
+        const partes = texto?.split('@'); 
         if (partes.length !== 2) {
             return texto; 
         }
@@ -66,13 +70,22 @@ const Datos = () => {
         setEmailValue(event.target.value);
     };
 
-    const handleNextClick = () => {
-        navigate('/lector');
+    const handleNextClick = async (e) => {
+        e.preventDefault();
+        try {
+            console.log("REGISTRO EXITOSO")
+            await fetchRegistro(sessionStorage.getItem("docTypeValue"),sessionStorage.getItem("docNumberValue"), emailValue, nombreValue);
+            navigate('/lector');
+            
+        } catch (error) {
+            console.error('Error al registrar los datos:', error);
+            
+        }
     };
 
     return (
         <div className="wrapper">
-            <form>
+             <form onSubmit={handleNextClick}>
                 <div className="header">
                     <img src="./images/recurso 9.png" alt="" className="top"/>
                     <img src="./images/recurso 18.png" alt="" className="topslide"/>
@@ -88,7 +101,7 @@ const Datos = () => {
                     <input type="text" value={emailValue} onChange={handleEmailChange} placeholder="Correo Electronico" required />
                 </div>
 
-                <button onClick={handleNextClick} className="siguiente">
+                <button className="siguiente">
                     Siguiente 
                     <img src="./images/recurso 4.png" alt="" className="flechita"/>
                 </button>
