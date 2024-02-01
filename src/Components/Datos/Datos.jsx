@@ -11,6 +11,8 @@ const Datos = () => {
     const [emailValue, setEmailValue] = useState('');
     const [docType, setDocType] = useState(''); 
     const [docNumber, setDocNumber] = useState(''); 
+    const [emailError, setEmailError] = useState('');
+    const [isChecked, setIsChecked] = useState(false); 
 
     useEffect(() => {
         const obtenerDatosUrl = () => {
@@ -70,17 +72,41 @@ const Datos = () => {
         setEmailValue(event.target.value);
     };
 
+    const validarEmail = (email) => {
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regexEmail.test(email);
+    };
+
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked); 
+    };
+
     const handleNextClick = async (e) => {
         e.preventDefault();
         try {
-            console.log("REGISTRO EXITOSO")
-            await fetchRegistro(sessionStorage.getItem("docTypeValue"),sessionStorage.getItem("docNumberValue"), emailValue, nombreValue);
-            navigate('/lector');
-            
+            if (!validarEmail(emailValue)) {
+                setEmailError('Por favor ingrese un email válido.');
+                return;
+            }
+    
+            const queryParams = new URLSearchParams(window.location.search);
+            const name = queryParams.get('name');
+            const email = queryParams.get('email');
+    
+            if (name && email) {
+                navigate('/lector');
+            } else {
+                console.log("REGISTRO EXITOSO");
+                await fetchRegistro(sessionStorage.getItem("docTypeValue"), sessionStorage.getItem("docNumberValue"), emailValue, nombreValue);
+                navigate('/lector');
+            }
         } catch (error) {
             console.error('Error al registrar los datos:', error);
-            
         }
+    };
+
+    const handleBackClick = () => {
+        navigate(-1); 
     };
 
     return (
@@ -96,15 +122,30 @@ const Datos = () => {
                 <div className="input-box">
                     <input type="text" value={nombreValue} onChange={handleNombreChange} placeholder="Nombre completo" required />
                 </div>
+                
                 <label className="labelemail" htmlFor="Correo">E-mail</label>
                 <div className="input-box">
                     <input type="text" value={emailValue} onChange={handleEmailChange} placeholder="Correo Electronico" required />
+                    {emailError && <div className="error-message">{emailError}</div>}
                 </div>
 
-                <button className="siguiente">
-                    Siguiente 
-                    <img src="./images/recurso 4.png" alt="" className="flechita"/>
-                </button>
+                <div className="terminus"> 
+                    <div className="checkbox-label">
+                        <input type="checkbox" id="terminos" name="terminos" checked={isChecked} onChange={handleCheckboxChange} required/>
+                        <label htmlFor="terminos"><a href="https://terminosycondicionesdeusoejemplo.com/">Aceptar politica de tratamiento de datos</a></label>
+                    </div>
+                </div>
+
+                <div className="botones">
+                    <button className="atras" onClick={handleBackClick}>
+                        <img src="./images/recurso 123.png" alt="" className="flechitaAtras"/>
+                    </button>
+
+                    <button className="siguiente" disabled={!isChecked}>
+                        Siguiente 
+                        <img src="./images/recurso 4.png" alt="" className="flechita"/>
+                    </button>
+                </div>
             </form>
         </div>
     );

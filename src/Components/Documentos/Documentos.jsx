@@ -74,7 +74,7 @@ const Documentos = () => {
                     <input type="text" value={docNumberValue} onChange={handleNumeroDocumentoChange} placeholder="número de documento" required />
                 </div>
 
-                <button type="submit" className="siguiente">
+                <button type="submit" className="siguiente1">
                     Siguiente 
                     <img src="./images/recurso 4.png" alt="" className="flechita"/>
                 </button>
