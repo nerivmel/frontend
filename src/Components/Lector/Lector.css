@@ -1,8 +1,4 @@
-.wrapper {
-    width: 420px;
-    background: rgb(245, 251, 255);
-    color: gray;
-}
+
 
 .wrapper .input-box {
     position: relative;
@@ -42,9 +38,8 @@
 }
 
 .siguiente1{
-    margin-top: 150px;
+    margin-top: 100px;
     margin-bottom: 30px;
-    margin-left: 80px;
     width: 60%;
     height: 40px;
     background: linear-gradient(90deg,rgb(137, 114, 155),rgb(112, 5, 158));

@@ -13,6 +13,7 @@ const Datos = () => {
     const [docNumber, setDocNumber] = useState(''); 
     const [emailError, setEmailError] = useState('');
     const [isChecked, setIsChecked] = useState(false); 
+    const [showImage, setShowImage] = useState(false); // Estado para controlar la visibilidad de la imagen
 
     useEffect(() => {
         const obtenerDatosUrl = () => {
@@ -26,6 +27,9 @@ const Datos = () => {
                     const emailTransformado = transformarEmail(email);
                     setNombreValue(nombreTransformado);
                     setEmailValue(emailTransformado);
+                    setShowImage(true); // Mostrar la imagen si hay datos en la URL
+                } else {
+                    setShowImage(false); // Ocultar la imagen si no hay datos en la URL
                 }
             } catch (error) {
                 console.error('Error al obtener los datos de la URL:', error);
@@ -81,6 +85,11 @@ const Datos = () => {
         setIsChecked(!isChecked); 
     };
 
+    const handleTerminosClick = (e) => {
+        e.preventDefault();
+        window.open("https://terminosycondicionesdeusoejemplo.com/", "_blank");
+    };
+
     const handleNextClick = async (e) => {
         e.preventDefault();
         try {
@@ -117,7 +126,12 @@ const Datos = () => {
                     <img src="./images/recurso 18.png" alt="" className="topslide"/>
                 </div>
 
-                <img src="./images/recurso 14.png" alt="" className="paraDatos"/>
+                {showImage ? (
+                    <img src="./images/recurso 14.png" alt="" className="paraDatos"/>
+                ) : (
+                    <img src="./images/recurso 666.png" alt="" className="paraDatos"/>
+                )}
+
                 <label className="labelname" htmlFor="Nombre">Nombre o Razón Social</label>
                 <div className="input-box">
                     <input type="text" value={nombreValue} onChange={handleNombreChange} placeholder="Nombre completo" required />
@@ -132,7 +146,11 @@ const Datos = () => {
                 <div className="terminus"> 
                     <div className="checkbox-label">
                         <input type="checkbox" id="terminos" name="terminos" checked={isChecked} onChange={handleCheckboxChange} required/>
-                        <label htmlFor="terminos"><a href="https://terminosycondicionesdeusoejemplo.com/">Aceptar politica de tratamiento de datos</a></label>
+                       <label htmlFor="terminos">
+                            <a href="https://terminosycondicionesdeusoejemplo.com/" onClick={handleTerminosClick}>
+                                Aceptar política de tratamiento de datos
+                            </a>
+                        </label>
                     </div>
                 </div>
 

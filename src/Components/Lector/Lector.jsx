@@ -1,62 +1,75 @@
 import React, { useState, useEffect } from "react";
 import Quagga from 'quagga'; 
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Lector.css';
+import swal from 'sweetalert';
+
 
 const Lector = () => {
     const [barcode, setBarcode] = useState(null);
     const [isCameraActive, setIsCameraActive] = useState(false);
     const [placaValue, setPlacaValue] = useState('');
     const [showPlacaInput, setShowPlacaInput] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (isCameraActive) {
             Quagga.init({
+                
                 inputStream: {
                     name: "Live",
                     type: "LiveStream",
-                    locate: true,
-                    frequency: 10,
                     target: document.querySelector('#camera-preview'),
                     constraints: {
                         width: 420,
                         height: 400,
-                        facingMode: "environment" 
-                    },
-                    area: { 
-                        top: "0%",    
-                        right: "0%",  
-                        left: "0%",   
-                        bottom: "0%"  
-                    },
+                        facingMode: "environment",
+                        aspectRatio: {min: 1, max: 2}
+                    }
                 },
+                numOfWorkers: 2,
+                frequency: 5,
                 decoder: {
-                    readers: ["ean_reader"] 
-                }
+                    readers: ["ean_reader"],
+                },
+                locate: true,
+                locator: {
+                    patchSize: "medium",
+                    halfSample: true
+                },
             }, (err) => {
                 if (err) {
-                    console.error(err);
+                    console.error("Error al iniciar Quagga:", err);
+                    alert("Ocurrió un error al iniciar la cámara. Por favor, inténtalo de nuevo.");
                     return;
                 }
                 Quagga.start();
             });
-
+    
             Quagga.onDetected((data) => {
                 setBarcode(data.codeResult.code);
                 Quagga.stop();
             });
-
+    
             return () => {
                 Quagga.stop();
             };
         }
     }, [isCameraActive]);
+    
 
     const handleCameraClick = () => {
         setIsCameraActive(true);
+        setShowPlacaInput(false); 
     };
 
     const handlePlacaClick = () => {
         setShowPlacaInput(true);
+        setIsCameraActive(false); 
+       
+    };
+    const handleBackClick2 = () => {
+        navigate('/lector'); 
     };
 
     return (
@@ -68,32 +81,40 @@ const Lector = () => {
                 </div>
                 <img src="./images/recurso 3.png" alt="" className="parati" />
                 <div className="image-container">
-                    {isCameraActive ? (
-                        <div id="camera-preview" className="cam-preview" style={{ maxHeight: "300px", overflow: "hidden" }} /> 
-                    ) : (
-                        <div className="image-box">
-                            <img src="./images/recurso 64.png" alt="Leer tiquete" className="cam" onClick={handleCameraClick} />
-                            <label className="labelcam" htmlFor="Leer Tiquete">Leer tiquete</label>
-                        </div>
-                    )}
-                    <div className="image-box2">
-                        <img src="./images/recurso 125.png" alt="Ingr Placa" className="placa" onClick={handlePlacaClick} />
-                        <label className="labelcam" htmlFor="Leer Tiquete">Ingresar placa</label>
-                        
-                    </div>
-                    
-                </div>
-                {showPlacaInput && (
-                            <input 
-                                type="text" 
-                                className="InputPlaca"
-                                value={placaValue} 
-                                onChange={(e) => setPlacaValue(e.target.value)} 
-                                placeholder="Ingrese la placa" 
-                            />
+                {isCameraActive ? (
+                    <div id="camera-preview" className="cam-preview" style={{ maxHeight: "300px", overflow: "hidden" }} /> 
+                        ) : null}
+                        {!showPlacaInput && !isCameraActive && (
+                            <div className="image-box">
+                                <img src="./images/recurso 64.png" alt="Leer tiquete" className="cam" onClick={handleCameraClick} />
+                                <label className="labelcam" htmlFor="Leer Tiquete">Leer tiquete</label>
+                            </div>
                         )}
+                        {!showPlacaInput &&  !isCameraActive && (
+                            <div className="image-box2">
+                                <img src="./images/recurso 125.png" alt="Ingr Placa" className="placa" onClick={handlePlacaClick} />
+                                <label className="labelcam" htmlFor="Leer Tiquete">Ingresar placa</label>
+                            </div>
+                        )}
+                    </div>
+                {showPlacaInput && (
+                    <input 
+                        type="text" 
+                        className="InputPlaca"
+                        value={placaValue} 
+                        onChange={(e) => setPlacaValue(e.target.value)} 
+                        placeholder="Ingrese la placa" 
+                    />
+                )}
                 {barcode && <p className="barcode-result">{barcode}</p>}
-                <button type="submit" className="siguiente1">Finalizar</button>
+                <div className="botones">
+                    <button className="atras" onClick={handleBackClick2}>
+                            <img src="./images/recurso 123.png" alt="" className="flechitaAtras"/>
+                    </button>
+                    <button type="submit" className="siguiente1">Finalizar</button>
+                </div>
+                    
+            
             </form>
         </div>
     );

@@ -1,7 +1,10 @@
+
+
 .wrapper{
+    display: flexbox;
     width: 420px;
-    background: rgb(245, 251, 255);
-    color: gray;
+    background: linear-gradient(rgba(228, 218, 247, 0.5), rgba(226, 226, 223, 0.828));
+    
 }
 
 .wrapper .input-box{
