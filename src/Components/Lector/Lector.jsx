@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Quagga from 'quagga'; 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Lector.css';
-import swal from 'sweetalert';
-
 
 const Lector = () => {
     const [barcode, setBarcode] = useState(null);
     const [isCameraActive, setIsCameraActive] = useState(false);
     const [placaValue, setPlacaValue] = useState('');
     const [showPlacaInput, setShowPlacaInput] = useState(false);
+    const [showBackButton, setShowBackButton] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (isCameraActive) {
             Quagga.init({
-                
                 inputStream: {
                     name: "Live",
                     type: "LiveStream",
@@ -27,7 +25,7 @@ const Lector = () => {
                         aspectRatio: {min: 1, max: 2}
                     }
                 },
-                numOfWorkers: 2,
+                numOfWorkers: 4,
                 frequency: 5,
                 decoder: {
                     readers: ["ean_reader"],
@@ -56,20 +54,23 @@ const Lector = () => {
             };
         }
     }, [isCameraActive]);
-    
 
     const handleCameraClick = () => {
         setIsCameraActive(true);
-        setShowPlacaInput(false); 
+        setShowPlacaInput(false);
+        setShowBackButton(true); 
     };
 
     const handlePlacaClick = () => {
         setShowPlacaInput(true);
-        setIsCameraActive(false); 
-       
+        setIsCameraActive(false);
+        setShowBackButton(true); 
     };
-    const handleBackClick2 = () => {
-        navigate('/lector'); 
+
+    const handleBackClick = () => {
+        setIsCameraActive(false);
+        setShowPlacaInput(false);
+        setShowBackButton(false); 
     };
 
     return (
@@ -81,22 +82,22 @@ const Lector = () => {
                 </div>
                 <img src="./images/recurso 3.png" alt="" className="parati" />
                 <div className="image-container">
-                {isCameraActive ? (
-                    <div id="camera-preview" className="cam-preview" style={{ maxHeight: "300px", overflow: "hidden" }} /> 
-                        ) : null}
-                        {!showPlacaInput && !isCameraActive && (
-                            <div className="image-box">
-                                <img src="./images/recurso 64.png" alt="Leer tiquete" className="cam" onClick={handleCameraClick} />
-                                <label className="labelcam" htmlFor="Leer Tiquete">Leer tiquete</label>
-                            </div>
-                        )}
-                        {!showPlacaInput &&  !isCameraActive && (
-                            <div className="image-box2">
-                                <img src="./images/recurso 125.png" alt="Ingr Placa" className="placa" onClick={handlePlacaClick} />
-                                <label className="labelcam" htmlFor="Leer Tiquete">Ingresar placa</label>
-                            </div>
-                        )}
-                    </div>
+                    {isCameraActive && (
+                        <div id="camera-preview" className="cam-preview" style={{ maxHeight: "300px", overflow: "hidden" }} /> 
+                    )}
+                    {!showPlacaInput && !isCameraActive && (
+                        <div className="image-box">
+                            <img src="./images/recurso 64.png" alt="Leer tiquete" className="cam" onClick={handleCameraClick} />
+                            <label className="labelcam" htmlFor="Leer Tiquete">Leer tiquete</label>
+                        </div>
+                    )}
+                    {!showPlacaInput && !isCameraActive && (
+                        <div className="image-box2">
+                            <img src="./images/recurso 125.png" alt="Ingr Placa" className="placa" onClick={handlePlacaClick} />
+                            <label className="labelcam" htmlFor="Leer Tiquete">Ingresar placa</label>
+                        </div>
+                    )}
+                </div>
                 {showPlacaInput && (
                     <input 
                         type="text" 
@@ -108,13 +109,13 @@ const Lector = () => {
                 )}
                 {barcode && <p className="barcode-result">{barcode}</p>}
                 <div className="botones">
-                    <button className="atras" onClick={handleBackClick2}>
+                    {showBackButton && (
+                        <button className="atras" onClick={handleBackClick}>
                             <img src="./images/recurso 123.png" alt="" className="flechitaAtras"/>
-                    </button>
+                        </button>
+                    )}
                     <button type="submit" className="siguiente1">Finalizar</button>
                 </div>
-                    
-            
             </form>
         </div>
     );

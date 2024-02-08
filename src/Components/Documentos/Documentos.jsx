@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import './Documentos.css';
 import { fetchPersona } from "../../api/api";
+import CryptoJS from 'crypto-js'; // Importar CryptoJS
 
 const Documentos = () => {
+    
     const [docTypeValue, setDocumentoValue] = useState('');
     const [docNumberValue, setNumeroDocumentoValue] = useState('');
     const navigate = useNavigate();
@@ -25,20 +27,23 @@ const Documentos = () => {
                 return;
             }
 
-            
         try {
             const data = await fetchPersona(docTypeValue, docNumberValue);
 
             if (data) {
+                const encryptedName = CryptoJS.AES.encrypt(data.name, 'secret key').toString(); // Encriptar el nombre
+                const encryptedEmail = CryptoJS.AES.encrypt(data.email, 'secret key').toString(); // Encriptar el email
                 const queryParams = new URLSearchParams();
-                queryParams.append('name', data.name);
-                queryParams.append('email', data.email);
+                queryParams.append('name', encryptedName);
+                queryParams.append('email', encryptedEmail);
                 navigate(`/datos?${queryParams.toString()}`);
                 
             } else {
                 const queryParams = new URLSearchParams();
-                sessionStorage.setItem('docNumberValue', docNumberValue);
-                sessionStorage.setItem('docTypeValue', docTypeValue);
+                const encryptedDocNumberValue = CryptoJS.AES.encrypt(docNumberValue, 'secret key').toString(); // Encriptar el número de documento
+                const encryptedDocTypeValue = CryptoJS.AES.encrypt(docTypeValue, 'secret key').toString(); // Encriptar el tipo de documento
+                sessionStorage.setItem('docNumberValue', encryptedDocNumberValue);
+                sessionStorage.setItem('docTypeValue', encryptedDocTypeValue);
                 navigate(`/datos?${queryParams.toString()}`);
             }
         } catch (error) { 

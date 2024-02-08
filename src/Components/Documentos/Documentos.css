@@ -97,3 +97,74 @@
     font-size: 30px;
     
 }
+/* Estilos para pantallas más pequeñas */
+@media screen and (max-width: 600px) {
+    .parati {
+        margin-top: 40px;
+        margin-bottom: 60px;
+        margin-left: 20px;
+        max-width: 90%;
+        max-height: auto;
+    }
+    
+    .top {
+        max-width: 200px;
+        max-height: 100px;
+    }
+    
+    .topslide {
+        width: 150px;
+    }
+    
+    .wrapper .siguiente0 {
+        margin-top: 50px;
+        margin-bottom: 20px;
+        margin-left: 20px;
+        width: 80%;
+        font-size: 20px;
+    }
+    
+    .labeldoc {
+        padding-left: 10%;
+    }
+    
+    .labeltype {
+        padding-left: 15%;
+    }
+}
+
+/* Estilos para pantallas medianas y grandes */
+@media screen and (min-width: 601px) {
+    .parati {
+        margin-top: 80px;
+        margin-bottom: 100px;
+        margin-left: 50px;
+        max-width: 1000px;
+        max-height: 150px;
+    }
+    
+    .top {
+        max-width: 350px;
+        max-height: 170px;
+    }
+    
+    .topslide {
+        width: 200px;
+    }
+    
+    .wrapper .siguiente0 {
+        margin-top: 100px;
+        margin-bottom: 30px;
+        margin-left: 80px;
+        width: 60%;
+        font-size: 30px;
+    }
+    
+    .labeldoc {
+        padding-left: 27%;
+    }
+    
+    .labeltype {
+        padding-left: 30%;
+    }
+}

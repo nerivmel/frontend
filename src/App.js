@@ -10,6 +10,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" exact element={<Documentos/>} />
+        <Route path='/fontanarHome' exact element={<Documentos/>} />
+        <Route path='/fontanarDatos' exact element={<Datos/>} />
+        <Route path='/fontanarLector' exact element={<Lector/>} />
+        <Route path='/arkadiaHome' exact element={<Documentos/>} />
         <Route path="/datos" element={<Datos  />} />
         <Route path="/lector" element={<Lector />} />
       </Routes>

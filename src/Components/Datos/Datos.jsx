@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchRegistro } from "../../api/api";
 import './Datos.css';
+import CryptoJS from 'crypto-js'; 
 
 const Datos = () => {
     const location = useLocation();
@@ -15,6 +16,11 @@ const Datos = () => {
     const [isChecked, setIsChecked] = useState(false); 
     const [showImage, setShowImage] = useState(false); // Estado para controlar la visibilidad de la imagen
 
+    const desencriptarTexto = (textoEncriptado) => {
+        const textoDesencriptado = CryptoJS.AES.decrypt(textoEncriptado, 'secret key').toString(CryptoJS.enc.Utf8);
+        return textoDesencriptado;
+    };
+
     useEffect(() => {
         const obtenerDatosUrl = () => {
             try {
@@ -23,13 +29,16 @@ const Datos = () => {
                 const email = searchParams.get('email');
     
                 if (nombre && email) {
-                    const nombreTransformado = transformarNombre(nombre);
-                    const emailTransformado = transformarEmail(email);
+                    const nombreDesencriptado = desencriptarTexto(nombre);
+                    const emailDesencriptado = desencriptarTexto(email);
+
+                    const nombreTransformado = transformarNombre(nombreDesencriptado);
+                    const emailTransformado = transformarEmail(emailDesencriptado);
                     setNombreValue(nombreTransformado);
                     setEmailValue(emailTransformado);
-                    setShowImage(true); // Mostrar la imagen si hay datos en la URL
+                    setShowImage(true); 
                 } else {
-                    setShowImage(false); // Ocultar la imagen si no hay datos en la URL
+                    setShowImage(false); 
                 }
             } catch (error) {
                 console.error('Error al obtener los datos de la URL:', error);
@@ -106,7 +115,10 @@ const Datos = () => {
                 navigate('/lector');
             } else {
                 console.log("REGISTRO EXITOSO");
-                await fetchRegistro(sessionStorage.getItem("docTypeValue"), sessionStorage.getItem("docNumberValue"), emailValue, nombreValue);
+                const docTypeDesencriptado = desencriptarTexto(sessionStorage.getItem("docTypeValue"));
+                const docNumberDesencriptado = desencriptarTexto(sessionStorage.getItem("docNumberValue"));
+    
+                await fetchRegistro(docTypeDesencriptado, docNumberDesencriptado, emailValue, nombreValue);
                 navigate('/lector');
             }
         } catch (error) {
@@ -115,11 +127,13 @@ const Datos = () => {
     };
 
     const handleBackClick = () => {
-        navigate(-1); 
+        navigate('/'); 
     };
 
     return (
+        
         <div className="wrapper">
+            
              <form onSubmit={handleNextClick}>
                 <div className="header">
                     <img src="./images/recurso 9.png" alt="" className="top"/>
