@@ -1,14 +1,37 @@
-import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Documentos.css';
 import { fetchPersona } from "../../api/api";
-import CryptoJS from 'crypto-js'; // Importar CryptoJS
+import CryptoJS from 'crypto-js'; 
 
 const Documentos = () => {
     
     const [docTypeValue, setDocumentoValue] = useState('');
     const [docNumberValue, setNumeroDocumentoValue] = useState('');
+    const [imageUrl, setImageUrl] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+    const [facility, setFacility]=useState('');
+
+    useEffect(() => {
+        const facilityParam = location.pathname.split('/').pop();
+        async function fetchFacilityImage() {
+            try {
+                const response = await fetch(`http://localhost:8080/getFacility/${facilityParam}`);
+                const data = await response.json();
+                if (response.ok) {
+                    const imageUrl = `data:image/jpeg;base64,${data[0].datosImagen}`;
+                    setImageUrl(imageUrl);
+                    setFacility(facilityParam);
+                } else {
+                    console.error('Error al obtener la imagen de la instalación:', data.error);
+                }
+            } catch (error) {
+                console.error('Error al obtener la imagen de la instalación:', error);
+            }
+        }
+        fetchFacilityImage();
+    }, [location.pathname]); 
 
     const handleDocumentoChange = (event) => {
         setDocumentoValue(event.target.value);
@@ -21,11 +44,10 @@ const Documentos = () => {
     const handleNextClick = async (e) => {
         e.preventDefault();
     
-        
-            if (docNumberValue.trim() === '' || docTypeValue.trim() === '') {
-                alert('Por favor, ingrese un tipo y número de documento');
-                return;
-            }
+        if (docNumberValue.trim() === '' || docTypeValue.trim() === '') {
+            alert('Por favor, ingrese un tipo y número de documento');
+            return;
+        }
 
         try {
             const data = await fetchPersona(docTypeValue, docNumberValue);
@@ -52,7 +74,6 @@ const Documentos = () => {
         }
     };
     
-    
     return (
         <div className="wrapper">
             <form onSubmit={handleNextClick}>
@@ -61,7 +82,7 @@ const Documentos = () => {
                     <img src="./images/recurso 2.png" alt="" className="topslide"/>
                 </div>
 
-                <img src="./images/recurso 3.png" alt="" className="parati"/>
+                {imageUrl && <img src={imageUrl} alt="" className="parati"/>} 
                 <label className="labeltype" htmlFor="Tipo de documento">Tipo de Documento</label>
                 <div className="input-box">
                 <select name="select" value={docTypeValue} onChange={handleDocumentoChange}>

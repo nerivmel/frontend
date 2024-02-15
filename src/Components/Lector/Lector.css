@@ -33,25 +33,22 @@
     margin-right: auto;
 }
 
-.input-box input::placeholder {
-    color: rgb(218, 218, 218);
-}
-
 .siguiente1{
     margin-top: 10%;
     margin-bottom: 30px;
+    margin-left: 40px;
     width: 60%;
     height: 40px;
-    background: linear-gradient(90deg,rgb(137, 114, 155),rgb(112, 5, 158));
+    background: #ee7f24;
     border: none;
     border-radius: 5px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     color: aliceblue;
     font-size: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
-.siguiente1:hover{
-    background: linear-gradient(90deg,rgb(112, 5, 158),rgb(104, 82, 121));
-}
+
 
 .labelcam {
     text-align: center; /* Centrar el texto */

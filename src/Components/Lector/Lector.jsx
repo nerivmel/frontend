@@ -73,6 +73,7 @@ const Lector = () => {
         setShowBackButton(false); 
     };
 
+
     return (
         <div className="wrapper">
             <form action="">
@@ -114,6 +115,7 @@ const Lector = () => {
                             <img src="./images/recurso 123.png" alt="" className="flechitaAtras"/>
                         </button>
                     )}
+                
                     <button type="submit" className="siguiente1">Finalizar</button>
                 </div>
             </form>

@@ -14,7 +14,7 @@ const Datos = () => {
     const [docNumber, setDocNumber] = useState(''); 
     const [emailError, setEmailError] = useState('');
     const [isChecked, setIsChecked] = useState(false); 
-    const [showImage, setShowImage] = useState(false); // Estado para controlar la visibilidad de la imagen
+    const [showImage, setShowImage] = useState(false); 
 
     const desencriptarTexto = (textoEncriptado) => {
         const textoDesencriptado = CryptoJS.AES.decrypt(textoEncriptado, 'secret key').toString(CryptoJS.enc.Utf8);
@@ -126,8 +126,9 @@ const Datos = () => {
         }
     };
 
-    const handleBackClick = () => {
-        navigate('/'); 
+    const handleBackClick = async (e) => {
+        e.preventDefault();
+        navigate(-1)
     };
 
     return (
@@ -140,11 +141,9 @@ const Datos = () => {
                     <img src="./images/recurso 18.png" alt="" className="topslide"/>
                 </div>
 
-                {showImage ? (
+                
                     <img src="./images/recurso 14.png" alt="" className="paraDatos"/>
-                ) : (
-                    <img src="./images/recurso 666.png" alt="" className="paraDatos"/>
-                )}
+               
 
                 <label className="labelname" htmlFor="Nombre">Nombre o Razón Social</label>
                 <div className="input-box">
