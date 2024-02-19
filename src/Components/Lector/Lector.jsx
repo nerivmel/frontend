@@ -11,6 +11,7 @@ const Lector = () => {
     const [showBackButton, setShowBackButton] = useState(false);
     const navigate = useNavigate();
 
+
     useEffect(() => {
         if (isCameraActive) {
             Quagga.init({
@@ -54,6 +55,10 @@ const Lector = () => {
             };
         }
     }, [isCameraActive]);
+    
+    const goBackToHome = () =>{
+        navigate("/arkadia")
+    }
 
     const handleCameraClick = () => {
         setIsCameraActive(true);
@@ -73,13 +78,12 @@ const Lector = () => {
         setShowBackButton(false); 
     };
 
-
     return (
         <div className="wrapper">
             <form action="">
                 <div className="header">
                     <img src="./images/recurso 9.png" alt="" className="top" />
-                    <img src="./images/recurso 52.png" alt="" className="topslide" />
+                    <progress id="file" max="100" value="100">100%</progress>
                 </div>
                 <img src="./images/recurso 3.png" alt="" className="parati" />
                 <div className="image-container">
@@ -115,6 +119,9 @@ const Lector = () => {
                             <img src="./images/recurso 123.png" alt="" className="flechitaAtras"/>
                         </button>
                     )}
+                    <button className="atras" onClick={goBackToHome}>
+                            <img src="./images/recurso 123.png" alt="" className="flechitaAtras"/>
+                    </button>
                 
                     <button type="submit" className="siguiente1">Finalizar</button>
                 </div>

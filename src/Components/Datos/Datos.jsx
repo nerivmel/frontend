@@ -138,7 +138,7 @@ const Datos = () => {
              <form onSubmit={handleNextClick}>
                 <div className="header">
                     <img src="./images/recurso 9.png" alt="" className="top"/>
-                    <img src="./images/recurso 18.png" alt="" className="topslide"/>
+                    <progress id="file" max="100" value="66">66%</progress>
                 </div>
 
                 

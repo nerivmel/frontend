@@ -1,4 +1,13 @@
-
+#file {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 20px;
+    margin-left: 50px;
+    margin-top: 25px;
+  }
+  
 .wrapper .input-box{
     position: relative;
     width: 90%;
