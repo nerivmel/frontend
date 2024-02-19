@@ -15,6 +15,8 @@ const Datos = () => {
     const [emailError, setEmailError] = useState('');
     const [isChecked, setIsChecked] = useState(false); 
     const [showImage, setShowImage] = useState(false); 
+    const [facilityImage, setFacilityImage] = useState('');
+    const [facilityParam, setFacilityParam] = useState('');
 
     const desencriptarTexto = (textoEncriptado) => {
         const textoDesencriptado = CryptoJS.AES.decrypt(textoEncriptado, 'secret key').toString(CryptoJS.enc.Utf8);
@@ -22,12 +24,12 @@ const Datos = () => {
     };
 
     useEffect(() => {
-        const obtenerDatosUrl = () => {
+        const obtenerDatosUrl = async () => {
             try {
                 const searchParams = new URLSearchParams(location.search);
                 const nombre = searchParams.get('name');
                 const email = searchParams.get('email');
-    
+
                 if (nombre && email) {
                     const nombreDesencriptado = desencriptarTexto(nombre);
                     const emailDesencriptado = desencriptarTexto(email);
@@ -36,17 +38,32 @@ const Datos = () => {
                     const emailTransformado = transformarEmail(emailDesencriptado);
                     setNombreValue(nombreTransformado);
                     setEmailValue(emailTransformado);
-                    setShowImage(true); 
+                    setShowImage(true);
                 } else {
-                    setShowImage(false); 
+                    setShowImage(false);
+                }
+
+                // Obtener el parámetro de la instalación (arkadia, fontanar, molinos)
+                const pathSegments = location.pathname.split('/datos');
+                const facility = pathSegments.pop();
+                setFacilityParam(facility);
+
+                // Realizar solicitud a la API para obtener la imagen de la instalación
+                const response = await fetch(`http://localhost:8080/getFacility/${facility}`);
+                const data = await response.json();
+                if (response.ok) {
+                    const imageUrl = `data:image/jpeg;base64,${data[0].datosImagen}`;
+                    setFacilityImage(imageUrl);
+                } else {
+                    console.error('Error al obtener la imagen de la instalación:', data.error);
                 }
             } catch (error) {
                 console.error('Error al obtener los datos de la URL:', error);
             }
         };
-    
+
         obtenerDatosUrl();
-    }, [location.search]);
+    }, [location.search, location.pathname]);
 
     const transformarNombre = (texto) => {
         if (texto.length <= 4) {
@@ -132,30 +149,22 @@ const Datos = () => {
     };
 
     return (
-        
         <div className="wrapper">
-            
-             <form onSubmit={handleNextClick}>
+            <form onSubmit={handleNextClick}>
                 <div className="header">
                     <img src="./images/recurso 9.png" alt="" className="top"/>
                     <progress id="file" max="100" value="66">66%</progress>
                 </div>
-
-                
-                    <img src="./images/recurso 14.png" alt="" className="paraDatos"/>
-               
-
+                {facilityImage && <img src={facilityImage} alt="" className="parati"/>} 
                 <label className="labelname" htmlFor="Nombre">Nombre o Razón Social</label>
                 <div className="input-box">
                     <input type="text" value={nombreValue} onChange={handleNombreChange} placeholder="Nombre completo" required />
                 </div>
-                
                 <label className="labelemail" htmlFor="Correo">E-mail</label>
                 <div className="input-box">
                     <input type="text" value={emailValue} onChange={handleEmailChange} placeholder="Correo Electronico" required />
                     {emailError && <div className="error-message">{emailError}</div>}
                 </div>
-
                 <div className="terminus"> 
                     <div className="checkbox-label">
                         <input type="checkbox" id="terminos" name="terminos" checked={isChecked} onChange={handleCheckboxChange} required/>
@@ -166,12 +175,10 @@ const Datos = () => {
                         </label>
                     </div>
                 </div>
-
                 <div className="botones">
                     <button className="atras" onClick={handleBackClick}>
                         <img src="./images/recurso 123.png" alt="" className="flechitaAtras"/>
                     </button>
-
                     <button className="siguiente" disabled={!isChecked}>
                         Siguiente 
                         <img src="./images/recurso 4.png" alt="" className="flechita"/>

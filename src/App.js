@@ -13,9 +13,9 @@ function App() {
         <Route path='/fontanar' exact element={<Documentos/>} />
         <Route path='/arkadia' exact element={<Documentos/>} />
         <Route path='/molinos' exact element={<Documentos/>} /> 
-        <Route path="/datosArkadia" element={<Datos  />} />
-        <Route path="/datosMolinos" element={<Datos  />} />
-        <Route path="/datosFontanar" element={<Datos  />} />
+        <Route path="/datosarkadia" element={<Datos  />} />
+        <Route path="/datosmolinos" element={<Datos  />} />
+        <Route path="/datosfontanar" element={<Datos  />} />
         <Route path="/lector" element={<Lector />} />
       </Routes>
     </Router>

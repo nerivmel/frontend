@@ -63,13 +63,13 @@ const Documentos = () => {
                 let targetPath = '';
                 switch (window.location.pathname) {
                     case '/arkadia':
-                        targetPath = '/datosArkadia';
+                        targetPath = '/datosarkadia';
                         break;
                     case '/fontanar':
-                        targetPath = '/datosFontanar';
+                        targetPath = '/datosfontanar';
                         break;
                     case '/molinos':
-                        targetPath = '/datosMolinos';
+                        targetPath = '/datosmolinos';
                         break;
                     default:
                         targetPath = '/defaultPath'; 
@@ -87,13 +87,13 @@ const Documentos = () => {
                 let targetPath = '';
                 switch (window.location.pathname) {
                     case '/arkadia':
-                        targetPath = '/datosArkadia';
+                        targetPath = '/datosarkadia';
                         break;
                     case '/fontanar':
-                        targetPath = '/datosFontanar';
+                        targetPath = '/datosfontanar';
                         break;
                     case '/molinos':
-                        targetPath = '/datosMolinos';
+                        targetPath = '/datosmolinos';
                         break;
                     default:
                         targetPath = '/defaultPath'; 
