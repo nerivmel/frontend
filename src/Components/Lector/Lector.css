@@ -51,31 +51,31 @@
 
 
 .labelcam {
-    text-align: center; /* Centrar el texto */
+    text-align: center; 
     color: rgb(173, 180, 201);
     font-size: 24px;
     margin-top: 5px;
 }
 
 .parati {
-    display: block; /* Convertir en bloque para aplicar márgenes automáticos */
+    display: block; 
     max-width: 1000px;
     max-height: 150px;
-    margin: 80px auto 100px; /* Margen automático en la parte superior e inferior y centrado horizontal */
+    margin: 80px auto 100px; 
 }
 
 .cam, .placa {
-    display: block; /* Convertir en bloque para aplicar márgenes automáticos */
+    display: block; 
     max-width: 200px;
     max-height: 200px;
-    margin: 0 auto 10px; /* Margen automático arriba y abajo y centrado horizontal */
+    margin: 0 auto 10px; 
 }
 
 .top {
     max-width: 350px;
     max-height: 170px;
-    display: block; /* Convertir en bloque para aplicar márgenes automáticos */
-    margin: 0 auto 10px; /* Margen automático arriba y abajo y centrado horizontal */
+    display: block; 
+    margin: 0 auto 10px; 
 }
 
 .topslide {
@@ -96,8 +96,7 @@
 .image-container {
     display: flex;
     justify-content: space-between;
-    margin-left: 50px;
-    margin-right: 50px;
+    
 }
 
 .image-box {
@@ -106,7 +105,7 @@
     padding: 10px;
     text-align: center;
     border-radius: 10px;
-    margin-bottom: 20px; /* Agregar margen inferior para separación */
+    
 }
 
 .image-box img {
@@ -128,7 +127,7 @@
     padding: 10px;
     text-align: center;
     border-radius: 10px;
-    margin-bottom: 20px; /* Agregar margen inferior para separación */
+    
 }
 
 .image-box2 img {
@@ -141,27 +140,41 @@
     color: #3b0a6a;
     font-size: 18px;
     margin-top: 5px;
-    text-align: center; /* Centrar el texto */
+    text-align: center; 
+    cursor: pointer;
 }
+.caplaca {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -30px; 
+}
+
+.textPlaca {
+    font-size: 16px; 
+    margin-bottom: 10px; 
+    color: #340779;
+}
+
 .InputPlaca {
-    width: 50%;
-    padding: 10px;
-    font-size: 16px;
-    margin-left: 100px;
-    margin-top: 30px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    transition: border-color 0.3s ease;
+    padding: 8px 12px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 14px;
+    width: 250px; 
+    box-sizing: border-box; 
+    text-align: center;
 }
 
 .InputPlaca:focus {
     outline: none;
-    border-color: #6e54ff; /* Color del borde cuando el input está enfocado */
-    box-shadow: 0 0 5px rgba(110, 84, 255, 0.5); /* Sombra alrededor del input cuando está enfocado */
+    border-color: #6e54ff; 
+    box-shadow: 0 0 5px rgba(110, 84, 255, 0.5); 
 }
 
 .InputPlaca::placeholder {
     color: #999; 
+    text-align: center;
 }
 
 .InputPlaca:hover {

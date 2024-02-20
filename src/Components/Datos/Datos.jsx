@@ -127,21 +127,32 @@ const Datos = () => {
             const queryParams = new URLSearchParams(window.location.search);
             const name = queryParams.get('name');
             const email = queryParams.get('email');
+            let navigationPath = '/lector';
+    
+            const pathname = window.location.pathname;
+            if (pathname.includes('/datosarkadia')) {
+                navigationPath = '/lectorarkadia';
+            } else if (pathname.includes('/datosmolinos')) {
+                navigationPath = '/lectormolinos';
+            } else if (pathname.includes('/datosfontanar')) {
+                navigationPath = '/lectorfontanar';
+            }
     
             if (name && email) {
-                navigate('/lector');
+                navigate(navigationPath);
             } else {
                 console.log("REGISTRO EXITOSO");
                 const docTypeDesencriptado = desencriptarTexto(sessionStorage.getItem("docTypeValue"));
                 const docNumberDesencriptado = desencriptarTexto(sessionStorage.getItem("docNumberValue"));
     
                 await fetchRegistro(docTypeDesencriptado, docNumberDesencriptado, emailValue, nombreValue);
-                navigate('/lector');
+                navigate(navigationPath);
             }
         } catch (error) {
             console.error('Error al registrar los datos:', error);
         }
     };
+    
 
     const handleBackClick = async (e) => {
         e.preventDefault();

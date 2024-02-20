@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Quagga from 'quagga'; 
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Lector.css';
 
 const Lector = () => {
@@ -9,8 +9,32 @@ const Lector = () => {
     const [placaValue, setPlacaValue] = useState('');
     const [showPlacaInput, setShowPlacaInput] = useState(false);
     const [showBackButton, setShowBackButton] = useState(false);
+    const [facilityImage, setFacilityImage] = useState('');
+    const [showBackToHomeButton, setShowBackToHomeButton] = useState(true);
     const navigate = useNavigate();
+    const location = useLocation();
 
+    useEffect(() => {
+        const pathSegments = location.pathname.split('/lector');
+        const facility = pathSegments.pop();
+
+        const fetchFacilityImage = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/getFacility/${facility}`);
+                const data = await response.json();
+                if (response.ok) {
+                    const imageUrl = `data:image/jpeg;base64,${data[0].datosImagen}`;
+                    setFacilityImage(imageUrl);
+                } else {
+                    console.error('Error al obtener la imagen de la instalación:', data.error);
+                }
+            } catch (error) {
+                console.error('Error al obtener la imagen de la instalación:', error);
+            }
+        };
+
+        fetchFacilityImage();
+    }, [location.pathname]);
 
     useEffect(() => {
         if (isCameraActive) {
@@ -56,28 +80,41 @@ const Lector = () => {
         }
     }, [isCameraActive]);
     
-    const goBackToHome = () =>{
-        navigate("/arkadia")
-    }
+    const goBackToHome = () => {
+        const pathname = window.location.pathname;
+    
+        if (pathname.includes("/lectorarkadia")) {
+            navigate("/arkadia");
+        } else if (pathname.includes("/lectorfontanar")) {
+            navigate("/fontanar");
+        } else if (pathname.includes("/lectormolinos")) {
+            navigate("/molinos");
+        } else {
+            throw new Error("No se pudo determinar la ruta de inicio.");
+        }
+    };
 
     const handleCameraClick = () => {
         setIsCameraActive(true);
         setShowPlacaInput(false);
-        setShowBackButton(true); 
+        setShowBackButton(true);
+        setShowBackToHomeButton(false); 
     };
-
+    
     const handlePlacaClick = () => {
         setShowPlacaInput(true);
         setIsCameraActive(false);
-        setShowBackButton(true); 
+        setShowBackButton(true);
+        setShowBackToHomeButton(false); 
     };
-
+    
     const handleBackClick = () => {
         setIsCameraActive(false);
         setShowPlacaInput(false);
-        setShowBackButton(false); 
+        setShowBackButton(false);
+        setShowBackToHomeButton(true); 
     };
-
+    
     return (
         <div className="wrapper">
             <form action="">
@@ -85,7 +122,7 @@ const Lector = () => {
                     <img src="./images/recurso 9.png" alt="" className="top" />
                     <progress id="file" max="100" value="100">100%</progress>
                 </div>
-                <img src="./images/recurso 3.png" alt="" className="parati" />
+                <img src={facilityImage} alt="" className="parati" />
                 <div className="image-container">
                     {isCameraActive && (
                         <div id="camera-preview" className="cam-preview" style={{ maxHeight: "300px", overflow: "hidden" }} /> 
@@ -104,13 +141,16 @@ const Lector = () => {
                     )}
                 </div>
                 {showPlacaInput && (
-                    <input 
-                        type="text" 
-                        className="InputPlaca"
-                        value={placaValue} 
-                        onChange={(e) => setPlacaValue(e.target.value)} 
-                        placeholder="Ingrese la placa" 
-                    />
+                    <div className="caplaca">
+                        <p className="textPlaca">Por favor ingrese la placa del vehículo:</p>
+                        <input 
+                            type="text" 
+                            className="InputPlaca"
+                            value={placaValue} 
+                            onChange={(e) => setPlacaValue(e.target.value)} 
+                            placeholder="Ingrese la placa" 
+                        />
+                    </div>
                 )}
                 {barcode && <p className="barcode-result">{barcode}</p>}
                 <div className="botones">
@@ -119,9 +159,11 @@ const Lector = () => {
                             <img src="./images/recurso 123.png" alt="" className="flechitaAtras"/>
                         </button>
                     )}
-                    <button className="atras" onClick={goBackToHome}>
+                    {showBackToHomeButton && ( 
+                        <button className="atras" onClick={goBackToHome}>
                             <img src="./images/recurso 123.png" alt="" className="flechitaAtras"/>
-                    </button>
+                        </button>
+                    )}
                 
                     <button type="submit" className="siguiente1">Finalizar</button>
                 </div>

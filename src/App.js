@@ -16,7 +16,9 @@ function App() {
         <Route path="/datosarkadia" element={<Datos  />} />
         <Route path="/datosmolinos" element={<Datos  />} />
         <Route path="/datosfontanar" element={<Datos  />} />
-        <Route path="/lector" element={<Lector />} />
+        <Route path="/lectorarkadia" element={<Lector />} />
+        <Route path="/lectorfontanar" element={<Lector />} />
+        <Route path="/lectormolinos" element={<Lector />} />
       </Routes>
     </Router>
   );
