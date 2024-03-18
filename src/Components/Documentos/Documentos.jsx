@@ -51,7 +51,6 @@ const Documentos = () => {
     
         try {
             const data = await fetchPersona(docTypeValue, docNumberValue);
-    
             if (data) {
                 const encryptedName = CryptoJS.AES.encrypt(data.name, 'secret key').toString(); // Encriptar el nombre
                 const encryptedEmail = CryptoJS.AES.encrypt(data.email, 'secret key').toString(); // Encriptar el email
@@ -59,7 +58,6 @@ const Documentos = () => {
                 queryParams.append('name', encryptedName);
                 queryParams.append('email', encryptedEmail);
     
-                // Decide a dónde navegar según la URL actual
                 let targetPath = '';
                 switch (window.location.pathname) {
                     case '/arkadia':
@@ -74,7 +72,6 @@ const Documentos = () => {
                     default:
                         targetPath = '/defaultPath'; 
                 }
-    
                 navigate(`${targetPath}?${queryParams.toString()}`);
             } else {
                 const queryParams = new URLSearchParams();
@@ -82,8 +79,6 @@ const Documentos = () => {
                 const encryptedDocTypeValue = CryptoJS.AES.encrypt(docTypeValue, 'secret key').toString(); 
                 sessionStorage.setItem('docNumberValue', encryptedDocNumberValue);
                 sessionStorage.setItem('docTypeValue', encryptedDocTypeValue);
-    
-                // Decide a dónde navegar según la URL actual
                 let targetPath = '';
                 switch (window.location.pathname) {
                     case '/arkadia':
@@ -98,7 +93,6 @@ const Documentos = () => {
                     default:
                         targetPath = '/defaultPath'; 
                 }
-    
                 navigate(`${targetPath}?${queryParams.toString()}`);
             }
         } catch (error) { 
@@ -106,17 +100,12 @@ const Documentos = () => {
             alert('Error al obtener los datos: ' + error.message);
         }
     };
-    
     return (
         <div className="wrapper">
             <form onSubmit={handleNextClick}>
-                <div className="header">
-                    <img src="./images/recurso 9.png" alt="" className="top"/>
-                    <progress id="file" max="100" value="33">33%</progress>
-                </div>
-
-                {imageUrl && <img src={imageUrl} alt="" className="parati"/>} 
-                <label className="labeltype" htmlFor="Tipo de documento">Tipo de Documento</label>
+                <div className="wrapper-inputs">
+                    {imageUrl && <img src={imageUrl} alt="" className="parati"/>}
+                    <label className="labeltype" htmlFor="Tipo de documento">Tipo de Documento</label>
                     <div className="input-box">
                         <select name="select" value={docTypeValue} onChange={handleDocumentoChange}>
                             <option value="">Seleccione un tipo de documento</option>
@@ -126,20 +115,20 @@ const Documentos = () => {
                             <option value="DOCUMENTO EXTRANJERO">DOCUMENTO EXTRANJERO</option>
                             <option value="PASAPORTE">PASAPORTE</option>
                             <option value="TARJETA DE IDENTIDAD">TARJETA DE IDENTIDAD</option>
-                        </select> 
+                        </select>
                     </div>
-                <label className="labeldoc" htmlFor="Numero de documento">Número de Documento</label>
-                <div className="input-box">
-                    <input type="text" value={docNumberValue} onChange={handleNumeroDocumentoChange} placeholder="número de documento" required />
+                    <label className="labeldoc" htmlFor="Numero de documento">Número de Documento</label>
+                    <div className="input-box">
+                        <input type="text" value={docNumberValue} onChange={handleNumeroDocumentoChange} placeholder="número de documento" required />
+                    </div>
                 </div>
-
-                <button type="submit" className="siguiente0">
-                    Siguiente 
-                    <img src="./images/recurso 4.png" alt="" className="flechita"/>
+                <button type="submit" className="siguiente0" onClick={handleNextClick}>
+                    <img src="./images/flechitanext.png" alt="img-siguiente" className="flechita" />
                 </button>
             </form>
+            <img className="logo-Itegra" src="./images/logodoc.png" alt="logo-itegra" />
         </div>
     );
+    
 };
-
 export default Documentos;

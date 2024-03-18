@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 728.27 73.93">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: 0em;
+      }
+
+      .cls-2 {
+        fill: #18304c;
+        font-family: TeXGyreAdventor-Bold, 'TeX Gyre Adventor';
+        font-size: 63px;
+        font-weight: 700;
+      }
+
+      .cls-3 {
+        letter-spacing: 0em;
+      }
+
+      .cls-4 {
+        letter-spacing: .01em;
+      }
+
+      .cls-5 {
+        letter-spacing: .02em;
+      }
+    </style>
+  </defs>
+  <g id="Capa_1-2" data-name="Capa 1">
+    <text class="cls-2" transform="translate(0 54.78)"><tspan class="cls-5" x="0" y="0">N</tspan><tspan class="cls-4" x="47.88" y="0">úme</tspan><tspan class="cls-3" x="187.11" y="0">r</tspan><tspan class="cls-4" x="206.64" y="0">o de documen</tspan><tspan x="669.05" y="0">t</tspan><tspan class="cls-1" x="687.95" y="0">o</tspan></text>
+  </g>
+</svg>

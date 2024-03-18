@@ -8,16 +8,6 @@
     margin: 10px 0;
 }
 
-.input-box input {
-    width: 100%;
-    height: 100%;
-    border: none;
-    outline: none;
-    border-radius: 10px;
-    font-size: 16px;
-    padding: 20px;
-}
-
 .barcode-result {
     font-size: 18px;
     font-weight: bold;
@@ -58,11 +48,12 @@
 }
 
 .parati {
-    display: block; 
-    max-width: 1000px;
-    max-height: 150px;
-    margin: 80px auto 100px; 
-}
+    width: 90%;
+    max-height: 150px; 
+    margin-top: 80px;
+    margin-bottom: 72px;
+    margin-left: 20px; 
+  }
 
 .cam, .placa {
     display: block; 

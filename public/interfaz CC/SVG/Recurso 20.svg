@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 815.2 815.2">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Degradado_sin_nombre_3);
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: url(#Degradado_sin_nombre_3-2);
+      }
+
+      .cls-3 {
+        fill: url(#Degradado_sin_nombre_3-5);
+      }
+
+      .cls-4 {
+        fill: url(#Degradado_sin_nombre_3-6);
+      }
+
+      .cls-5 {
+        fill: url(#Degradado_sin_nombre_3-4);
+      }
+
+      .cls-6 {
+        fill: url(#Degradado_sin_nombre_3-3);
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_3" data-name="Degradado sin nombre 3" x1="418.31" y1="-154.77" x2="418.31" y2="954.88" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e7e6e6"/>
+      <stop offset=".13" stop-color="#e7e6e6"/>
+      <stop offset=".88" stop-color="#a8a7a7"/>
+      <stop offset="1" stop-color="#a8a7a7"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_3-2" data-name="Degradado sin nombre 3" x1="161.91" y1="-154.77" x2="161.91" y2="954.88" xlink:href="#Degradado_sin_nombre_3"/>
+    <linearGradient id="Degradado_sin_nombre_3-3" data-name="Degradado sin nombre 3" x1="733.8" y1="-154.77" x2="733.8" y2="954.88" xlink:href="#Degradado_sin_nombre_3"/>
+    <linearGradient id="Degradado_sin_nombre_3-4" data-name="Degradado sin nombre 3" x1="733.8" y1="-154.77" x2="733.8" y2="954.88" xlink:href="#Degradado_sin_nombre_3"/>
+    <linearGradient id="Degradado_sin_nombre_3-5" data-name="Degradado sin nombre 3" x1="313.25" y1="-154.77" x2="313.25" y2="954.88" xlink:href="#Degradado_sin_nombre_3"/>
+    <linearGradient id="Degradado_sin_nombre_3-6" data-name="Degradado sin nombre 3" x1="77.53" y1="-154.77" x2="77.53" y2="954.88" xlink:href="#Degradado_sin_nombre_3"/>
+  </defs>
+  <g id="Capa_1-2" data-name="Capa 1">
+    <g>
+      <polygon class="cls-1" points="592.57 815.2 387.51 815.2 244.05 484.54 592.57 484.54 592.57 815.2"/>
+      <polygon class="cls-2" points="323.82 815.2 180.36 484.54 0 484.54 0 815.2 323.82 815.2"/>
+      <rect class="cls-6" x="652.4" y="484.54" width="162.8" height="330.66"/>
+      <rect class="cls-5" x="652.4" y="0" width="162.8" height="426.5"/>
+      <polygon class="cls-3" points="592.57 426.5 592.57 0 33.93 0 218.76 426.5 592.57 426.5"/>
+      <polygon class="cls-4" points="155.06 426.5 0 68.75 0 426.5 155.06 426.5"/>
+    </g>
+  </g>
+</svg>

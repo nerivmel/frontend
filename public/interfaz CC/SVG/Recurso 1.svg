@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 4928.5 2282.41">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #18304c;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        stroke-width: 0px;
+      }
+
+      .cls-5 {
+        fill: none;
+        stroke: url(#Degradado_sin_nombre_3-2);
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        fill: url(#Degradado_sin_nombre_3);
+      }
+
+      .cls-6, .cls-7 {
+        font-family: TeXGyreAdventor-Bold, 'TeX Gyre Adventor';
+        font-size: 196.8px;
+        font-weight: 700;
+      }
+
+      .cls-6, .cls-3 {
+        fill: #f3da40;
+      }
+
+      .cls-7 {
+        fill: #18304c;
+      }
+
+      .cls-7, .cls-8 {
+        letter-spacing: .01em;
+      }
+
+      .cls-9 {
+        letter-spacing: 0em;
+      }
+
+      .cls-10 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-4 {
+        fill: #69757b;
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_3" data-name="Degradado sin nombre 3" x1="1507.32" y1="2010.85" x2="1812.26" y2="2010.85" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e7e6e6"/>
+      <stop offset=".13" stop-color="#e7e6e6"/>
+      <stop offset=".88" stop-color="#a8a7a7"/>
+      <stop offset="1" stop-color="#a8a7a7"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_3-2" data-name="Degradado sin nombre 3" x1="0" y1="1141.21" x2="4928.5" y2="1141.21" xlink:href="#Degradado_sin_nombre_3"/>
+  </defs>
+  <g id="Capa_1-2" data-name="Capa 1">
+    <g>
+      <rect class="cls-2" x="1507.32" y="1858.38" width="304.94" height="304.94"/>
+      <g>
+        <rect class="cls-3" x="1875.32" y="187.15" width="1349.35" height="1349.35"/>
+        <rect class="cls-1" x="3396.73" y="187.15" width="1383.24" height="1383.24"/>
+        <rect class="cls-4" x="199.68" y="187.15" width="1315.47" height="1315.47"/>
+        <text class="cls-7" transform="translate(412.6 1807.52)"><tspan x="0" y="0">#69757B</tspan></text>
+        <text class="cls-6" transform="translate(2127.97 1807.52)"><tspan class="cls-8" x="0" y="0">#F3</tspan><tspan class="cls-10" x="320.79" y="0">D</tspan><tspan class="cls-9" x="452.65" y="0">A40</tspan></text>
+        <text class="cls-7" transform="translate(3726.62 1807.52)"><tspan x="0" y="0">#18304C</tspan></text>
+      </g>
+      <rect class="cls-5" x=".5" y=".5" width="4927.5" height="2281.41"/>
+    </g>
+  </g>
+</svg>

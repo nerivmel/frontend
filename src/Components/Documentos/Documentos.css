@@ -7,7 +7,16 @@
     margin-left: 50px;
     margin-top: 25px;
   }
-  
+  .wrapper{
+    padding: 30px;
+    width: 420px;
+    height: 100vh;
+    background-image: url("../../../public/images/recurso1doc.png");
+    background-color: white;
+    background-size: 420px 450px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
 .wrapper .input-box{
     position: relative;
     width: 90%;
@@ -15,7 +24,6 @@
     height: 40px;
     margin: 10px 0;
 }
-
 .input-box select {
     width: 100%;
     height: 100%;
@@ -24,7 +32,8 @@
     border-radius: 10px;
     font-size: 16px;
     padding: 10px; 
-    background-color: #4a1b6c; 
+    background-color: #69757b; 
+    text-align: center;
     color: #ffffff; 
     cursor: pointer;
 }
@@ -34,20 +43,39 @@
     color: #333; 
 }
 
-.input-box select:focus {
-    box-shadow: 0 0 5px #8642ad; 
-    border-color: #8434b2; 
+.flechita{
+    color: #333;
+    cursor: pointer;
+    height: 40px;
 }
 
-.input-box input{
+.siguiente0{
+    margin-left: 270px;
+    margin-top: 30px;
+    margin-bottom: 245px;
+    border: none;
+    width: 53px;
+    background-color: #ffffff;
+}
+
+.input-box select:focus {
+    box-shadow: 0 0 5px #11045b; 
+    border-color: #23036a; 
+}
+.logo-Itegra{
+    height: 60px;
+    margin-left: 250px;
+}
+.input-box input {
     width: 100%;
     height: 100%;
-    border: none;
     outline: none;
     border-radius: 10px;
     font-size: 16px;
-    padding: 20px 45px 20px 20px;
-    background-color: #e5e1e1;
+    padding: 20px;
+    border: 2px solid #69757b;
+    text-align: center;
+    margin-bottom: 20px;
 }
 .input-box input::placeholder{
     color: rgb(85, 83, 83);
@@ -56,25 +84,17 @@
 .labeldoc{
     padding-left: 27%;
     color: rgb(0, 0, 0);
+    font-weight: 600;
 }
-
 .labeltype{
     padding-left: 30%;
     color: rgb(9, 10, 10);
+    font-weight: 600;
 }
-.parati {
-    width: 90%;
-    max-height: 150px; 
-    margin-top: 80px;
-    margin-bottom: 100px;
-    margin-left: 50px; 
-  }
-
 .top {
     max-width: 350px; 
     max-height: 170px; 
 }
-
 .topslide {
     position: absolute;
     top: 30%; 
@@ -84,97 +104,5 @@
     height: auto; 
 }
 
-.siguiente0 .flechita{
-    padding-left: 7px;
-    max-width: 30px; 
-    max-height: 70px; 
-}
-.wrapper .siguiente0 {
-    margin-top: 100px;
-    margin-bottom: 30px;
-    margin-left: 80px;
-    width: 60%;
-    height: 40px;
-    background: #ee7f24;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    color: aliceblue;
-    font-size: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    
-}
-/* Estilos para pantallas más pequeñas */
-@media screen and (max-width: 600px) {
-    .parati {
-        margin-top: 40px;
-        margin-bottom: 60px;
-        margin-left: 20px;
-        max-width: 90%;
-        max-height: auto;
-    }
-    
-    .top {
-        max-width: 200px;
-        max-height: 100px;
-    }
-    
-    .topslide {
-        width: 150px;
-    }
-    
-    .wrapper .siguiente0 {
-        margin-top: 50px;
-        margin-bottom: 20px;
-        margin-left: 20px;
-        width: 80%;
-        font-size: 20px;
-    }
-    
-    .labeldoc {
-        padding-left: 10%;
-    }
-    
-    .labeltype {
-        padding-left: 15%;
-    }
-}
 
-/* Estilos para pantallas medianas y grandes */
-@media screen and (min-width: 601px) {
-    .parati {
-        margin-top: 80px;
-        margin-bottom: 100px;
-        margin-left: 50px;
-        max-width: 1000px;
-        max-height: 150px;
-    }
-    
-    .top {
-        max-width: 350px;
-        max-height: 170px;
-    }
-    
-    .topslide {
-        width: 200px;
-    }
-    
-    .wrapper .siguiente0 {
-        margin-top: 100px;
-        margin-bottom: 30px;
-        margin-left: 80px;
-        width: 60%;
-        font-size: 30px;
-    }
-    
-    .labeldoc {
-        padding-left: 27%;
-        
-    }
-    
-    .labeltype {
-        padding-left: 30%;
-        
-    }
-}
+

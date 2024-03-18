@@ -160,40 +160,34 @@ const Datos = () => {
     };
 
     return (
-        <div className="wrapper">
-            <form onSubmit={handleNextClick}>
-                <div className="header">
-                    <img src="./images/recurso 9.png" alt="" className="top"/>
-                    <progress id="file" max="100" value="66">66%</progress>
-                </div>
-                {facilityImage && <img src={facilityImage} alt="" className="parati"/>} 
+        <div className="wrapper2">
+            <form className="formDtos" onSubmit={handleNextClick}>
                 <label className="labelname" htmlFor="Nombre">Nombre o Razón Social</label>
                 <div className="input-box">
                     <input type="text" value={nombreValue} onChange={handleNombreChange} placeholder="Nombre completo" required />
                 </div>
                 <label className="labelemail" htmlFor="Correo">E-mail</label>
                 <div className="input-box">
-                    <input type="text" value={emailValue} onChange={handleEmailChange} placeholder="Correo Electronico" required />
+                    <input type="email" value={emailValue} onChange={handleEmailChange} placeholder="Correo Electronico" required />
                     {emailError && <div className="error-message">{emailError}</div>}
                 </div>
                 <div className="terminus"> 
                     <div className="checkbox-label">
-                        <input type="checkbox" id="terminos" name="terminos" checked={isChecked} onChange={handleCheckboxChange} required/>
+                        <input className="checkbox" type="checkbox" id="terminos" name="terminos" checked={isChecked} onChange={handleCheckboxChange} required/>
                        <label htmlFor="terminos">
                             <a href="https://terminosycondicionesdeusoejemplo.com/" onClick={handleTerminosClick}>
-                                Aceptar política de tratamiento de datos
+                                Aceptar política de <br />tratamiento de datos
                             </a>
                         </label>
                     </div>
                 </div>
                 <div className="botones">
                     <button className="atras" onClick={handleBackClick}>
-                        <img src="./images/recurso 123.png" alt="" className="flechitaAtras"/>
+                        <img src="./images/flechitaback.png" alt="" className="flechitaAtras"/>
                     </button>
-                    <button className="siguiente" disabled={!isChecked}>
-                        Siguiente 
-                        <img src="./images/recurso 4.png" alt="" className="flechita"/>
-                    </button>
+                    <button type="submit" className="siguiente0" onClick={handleNextClick}>
+                    <img src="./images/flechitanext.png" alt="img-siguiente" className="flechitadatnext" />
+                </button>
                 </div>
             </form>
         </div>

@@ -1,73 +1,29 @@
 
-
-.wrapper{
-    display: flexbox;
+.wrapper2{ 
     width: 420px;
-    background: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255));
-
+    height: 100vh;
+    background-image: url("../../../public/images/fondodatos.png");
+    background-color: white;
+    background-size: 500px 470px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
 }
 
-.wrapper .input-box{
-    position: relative;
-    width: 90%;
-    padding-left: 30px;
-    height: 40px;
-    margin: 10px 0;
+.formDtos{
+    text-align: center;
+    font-weight: 600;
 }
-
-.input-box input{
-    width: 100%;
-    height: 100%;
-    border: none;
-    outline: none;
-    border-radius: 10px;
-    font-size: 16px;
-    padding: 20px 45px 20px 20px;
-}
-
 .botones {
     display: flex;
-    justify-content: space-around; 
-    margin-right: 50px;
-    flex-wrap: nowrap
-    
   }
-.wrapper .siguiente {
-    margin-top: 10%;
-    margin-bottom: 30px;
-    margin-left: 20px;
-    width: 60%;
-    height: 40px;
-    background: #ee7f24;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    color: aliceblue;
-    font-size: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    
-}
-.wrapper .atras{
-    margin-top: 10%;
-    margin-bottom: 30px;
-    margin-left: 30px;
-    width: 13%;
-    height: 40px;
-    background: #ee7f24;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    color: aliceblue;
-}
+  
 .labelname{
-    padding-left: 120px;
-    color: rgb(173, 180, 201);
+    color: rgb(2, 2, 2);
 }
-.labelemail{
-    padding-left: 40%;
-    color: rgb(173, 180, 201);
-}
+
 .paraDatos {
     max-width: 600px; 
     max-height:100px; 
@@ -87,15 +43,23 @@
     width: 200px; 
     height: auto; 
 }
-.siguiente .flechita{
-    padding-left: 7px;
-    max-width: 30px; 
-    max-height: 70px; 
+
+.flechitadatnext{
+    width: 50px;
+    margin-left: -130px;
 }
-.atras .flechitaAtras{
-    margin-top: 5px;
-    max-width: 30px; 
-    max-height: 70px;    
+.flechitaAtras{
+    width: 50px;
+
+}
+
+.atras{
+    margin-top: 30px;
+    margin-bottom: 245px;
+    margin-left: 30px;
+    border: none;
+    width: 53px;
+    background-color: #ffffff;
 }
 .siguiente:disabled {
     background-color: #6c757d; 
@@ -110,54 +74,60 @@
 .terminus{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 10%;
+    align-items: end;
+    margin-right: 45px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    
 }
-  .terminus input[type="checkbox"] {
-    margin-right: 8px; 
-    width: 20px;
-    height: 20px;
-    border: 2px solid #8A2BE2; 
-    background-color: #8A2BE2; 
-    border-radius: 4px;
-    outline: none;
-    cursor: pointer;
-}  
-  .terminus input[type="checkbox"]:checked {
-    background-color: #8A2BE2; 
-}  
-  .terminus input[type="checkbox"]:checked::before {
-    content: "\2713"; 
-    display: block;
-    text-align: center;
-    color: white;
-}
+  
 .checkbox-label {
     display: flex;
     align-items: center;
 }
   input[type="checkbox"] {
     margin-right: 8px; 
-    width: 20px;
-    height: 20px;
-    border: 2px solid #8A2BE2;
-    background-color: #8A2BE2; 
+    width: 40px;
+    height: 40px;
+    border: 2px solid #080808;
+    background-color: #f3f3f3; 
     border-radius: 4px;
     outline: none;
     cursor: pointer;
-}   
-label {
-    color: #333;
-    font-size: 16px;
-}
+}  
+.checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   
+    border: 2px solid #ccc; /* Borde del checkbox */
+    border-radius: 4px; /* Borde redondeado */
+    outline: none; /* Quita el contorno al seleccionar */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el checkbox */
+}
+
+/* Estilo del checkbox cuando está marcado */
+.checkbox:checked {
+    background-color: gray; /* Cambia el color de fondo cuando está marcado */
+    border-color:rgb(232, 189, 48);/* Cambia el color del borde cuando está marcado */
+}
+
+/* Estilo del chulo (tick) cuando está marcado */
+.checkbox:checked::after {
+    content: '\2714'; /* Código Unicode para el tick */
+    font-size: 30px; /* Tamaño del tick */
+    margin-left: 5px;
+    color: rgb(232, 189, 48); /* Color del tick */
+}
+
   label a {
-    text-decoration: underline;
-    color: rgb(127, 43, 200); 
+    text-decoration: none;
+    font-size: 1.1em;
+    color: rgb(69, 59, 77); 
   }
   
   label a:hover {
-    color: rgb(70, 8, 114); 
+    color: rgb(232, 189, 48); 
   }
   
   
