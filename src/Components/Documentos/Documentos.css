@@ -47,6 +47,12 @@
     color: #333;
     cursor: pointer;
     height: 40px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.flechita:hover{
+    transform: scale(1.1) translate(5px, 5px); /* Aumenta la escala en un 10% y desplaza 5px hacia abajo y hacia la derecha */
+
 }
 
 .siguiente0{
@@ -63,6 +69,8 @@
     border-color: #23036a; 
 }
 .logo-Itegra{
+    position:absolute;
+    translate: 10px -120px;
     height: 60px;
     margin-left: 250px;
 }
@@ -77,6 +85,13 @@
     text-align: center;
     margin-bottom: 20px;
 }
+
+.input-box input:focus {
+    outline: none; /* Quita el contorno predeterminado del navegador */
+    border-color: #ffa500; /* Cambia el color del borde cuando está enfocado */
+    box-shadow: 0 0 5px #ffa500; /* Agrega una sombra cuando está enfocado */
+}
+
 .input-box input::placeholder{
     color: rgb(85, 83, 83);
 }
@@ -102,6 +117,11 @@
     transform: translate(-50%, -50%); 
     width: 200px; 
     height: auto; 
+}
+.parati{
+    width: 380px;
+    margin-top: 100px;
+    margin-bottom: 150px;
 }
 
 

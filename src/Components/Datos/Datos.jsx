@@ -10,13 +10,8 @@ const Datos = () => {
 
     const [nombreValue, setNombreValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
-    const [docType, setDocType] = useState(''); 
-    const [docNumber, setDocNumber] = useState(''); 
     const [emailError, setEmailError] = useState('');
     const [isChecked, setIsChecked] = useState(false); 
-    const [showImage, setShowImage] = useState(false); 
-    const [facilityImage, setFacilityImage] = useState('');
-    const [facilityParam, setFacilityParam] = useState('');
 
     const desencriptarTexto = (textoEncriptado) => {
         const textoDesencriptado = CryptoJS.AES.decrypt(textoEncriptado, 'secret key').toString(CryptoJS.enc.Utf8);
@@ -38,24 +33,6 @@ const Datos = () => {
                     const emailTransformado = transformarEmail(emailDesencriptado);
                     setNombreValue(nombreTransformado);
                     setEmailValue(emailTransformado);
-                    setShowImage(true);
-                } else {
-                    setShowImage(false);
-                }
-
-                // Obtener el parámetro de la instalación (arkadia, fontanar, molinos)
-                const pathSegments = location.pathname.split('/datos');
-                const facility = pathSegments.pop();
-                setFacilityParam(facility);
-
-                // Realizar solicitud a la API para obtener la imagen de la instalación
-                const response = await fetch(`http://localhost:8080/getFacility/${facility}`);
-                const data = await response.json();
-                if (response.ok) {
-                    const imageUrl = `data:image/jpeg;base64,${data[0].datosImagen}`;
-                    setFacilityImage(imageUrl);
-                } else {
-                    console.error('Error al obtener la imagen de la instalación:', data.error);
                 }
             } catch (error) {
                 console.error('Error al obtener los datos de la URL:', error);
@@ -163,12 +140,12 @@ const Datos = () => {
         <div className="wrapper2">
             <form className="formDtos" onSubmit={handleNextClick}>
                 <label className="labelname" htmlFor="Nombre">Nombre o Razón Social</label>
-                <div className="input-box">
-                    <input type="text" value={nombreValue} onChange={handleNombreChange} placeholder="Nombre completo" required />
+                <div className="input-box-name">
+                    <input className="inputname" type="text" value={nombreValue} onChange={handleNombreChange} placeholder="Nombre completo" required />
                 </div>
                 <label className="labelemail" htmlFor="Correo">E-mail</label>
-                <div className="input-box">
-                    <input type="email" value={emailValue} onChange={handleEmailChange} placeholder="Correo Electronico" required />
+                <div className="input-box-email">
+                    <input className="inputemail" type="email" value={emailValue} onChange={handleEmailChange} placeholder="Correo Electronico" required />
                     {emailError && <div className="error-message">{emailError}</div>}
                 </div>
                 <div className="terminus"> 
@@ -185,9 +162,11 @@ const Datos = () => {
                     <button className="atras" onClick={handleBackClick}>
                         <img src="./images/flechitaback.png" alt="" className="flechitaAtras"/>
                     </button>
-                    <button type="submit" className="siguiente0" onClick={handleNextClick}>
-                    <img src="./images/flechitanext.png" alt="img-siguiente" className="flechitadatnext" />
-                </button>
+                    {isChecked && (
+                        <button type="submit" className="siguiente0" onClick={handleNextClick}>
+                            <img src="./images/flechitanext.png" alt="img-siguiente" className="flechitadatnext" />
+                        </button>
+                    )}
                 </div>
             </form>
         </div>

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Documentos from './Components/Documentos/Documentos';
 import Datos from './Components/Datos/Datos';
 import Lector from './Components/Lector/Lector';

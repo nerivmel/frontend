@@ -116,26 +116,22 @@ const Lector = () => {
     };
     
     return (
-        <div className="wrapper">
+        <div className="wrapper3">
             <form action="">
-                <div className="header">
-                    <img src="./images/recurso 9.png" alt="" className="top" />
-                    <progress id="file" max="100" value="100">100%</progress>
-                </div>
-                <img src={facilityImage} alt="" className="parati" />
+                
                 <div className="image-container">
                     {isCameraActive && (
                         <div id="camera-preview" className="cam-preview" style={{ maxHeight: "300px", overflow: "hidden" }} /> 
                     )}
                     {!showPlacaInput && !isCameraActive && (
-                        <div className="image-box">
-                            <img src="./images/recurso 64.png" alt="Leer tiquete" className="cam" onClick={handleCameraClick} />
+                        <div>
+                            <img src="./images/leertiket.png" alt="Leer tiquete" className="cam" onClick={handleCameraClick} />
                             <label className="labelcam" htmlFor="Leer Tiquete">Leer tiquete</label>
                         </div>
                     )}
                     {!showPlacaInput && !isCameraActive && (
-                        <div className="image-box2">
-                            <img src="./images/recurso 125.png" alt="Ingr Placa" className="placa" onClick={handlePlacaClick} />
+                        <div>
+                            <img src="./images/igresarplaca.png" alt="Ingr Placa" className="placa" onClick={handlePlacaClick} />
                             <label className="labelcam" htmlFor="Leer Tiquete">Ingresar placa</label>
                         </div>
                     )}
@@ -153,17 +149,13 @@ const Lector = () => {
                     </div>
                 )}
                 {barcode && <p className="barcode-result">{barcode}</p>}
-                <div className="botones">
+                <div className="botoneslect">
                     {showBackButton && (
                         <button className="atras" onClick={handleBackClick}>
-                            <img src="./images/recurso 123.png" alt="" className="flechitaAtras"/>
+                            <img src="./images/flechitaback.png" alt="" className="flechitaAtraslector"/>
                         </button>
                     )}
-                    {showBackToHomeButton && ( 
-                        <button className="atras" onClick={goBackToHome}>
-                            <img src="./images/recurso 123.png" alt="" className="flechitaAtras"/>
-                        </button>
-                    )}
+                    
                 
                     <button type="submit" className="siguiente1">Finalizar</button>
                 </div>
