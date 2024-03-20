@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Documentos.css';
 import { fetchPersona } from "../../api/api";
-import CryptoJS from 'crypto-js'; 
+import CryptoJS from 'crypto-js';
+import { fetchFacilityImage } from "../../api/api"; 
 
 const Documentos = () => {
     
@@ -14,24 +15,17 @@ const Documentos = () => {
     const [facility, setFacility]=useState('');
 
     useEffect(() => {
-        const facilityParam = location.pathname.split('/').pop();
-        async function fetchFacilityImage() {
-            try {
-                const response = await fetch(`http://localhost:8080/getFacility/${facilityParam}`);
-                const data = await response.json();
-                if (response.ok) {
-                    const imageUrl = `data:image/jpeg;base64,${data[0].datosImagen}`;
-                    setImageUrl(imageUrl);
-                    setFacility(facilityParam);
-                } else {
-                    console.error('Error al obtener la imagen de la instalación:', data.error);
-                }
-            } catch (error) {
-                console.error('Error al obtener la imagen de la instalación:', error);
-            }
+        async function fetchData() {
+          try {
+            const { imageUrl, facility } = await fetchFacilityImage(location);
+            setImageUrl(imageUrl);
+            setFacility(facility);
+          } catch (error) {
+            console.error(error);
+          }
         }
-        fetchFacilityImage();
-    }, [location.pathname]); 
+        fetchData();
+      }, [location]);
 
     const handleDocumentoChange = (event) => {
         setDocumentoValue(event.target.value);

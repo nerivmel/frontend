@@ -43,21 +43,11 @@
     width: 200px; 
     height: auto; 
 }
-.inputname{
-    width: 80%; 
-    background-color: #69757b;
-    border-radius: 8px; 
-    padding: 10px; 
-    font-size: 1.2em; 
-    border: none;
-    color: white;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 25px;
-}
+
 .inputname::placeholder {
     color: white;
 }
+.inputname,
 .inputemail{
     width: 80%; 
     border-radius: 8px; 
@@ -71,16 +61,15 @@
 }
 .inputname:focus,
 .inputemail:focus {
-    outline: none; /* Quita el contorno predeterminado del navegador */
-    border-color: #ffa500; /* Cambia el color del borde cuando está enfocado */
-    box-shadow: 0 0 5px #ffa500; /* Agrega una sombra cuando está enfocado */
+    outline: none; 
+    border-color: #ffa500; 
+    box-shadow: 0 0 5px #ffa500; 
 }
 
-/* Estilos para el texto seleccionado dentro del campo de entrada */
 .inputname::selection,
 .inputemail::selection {
-    background-color: #ffa500; /* Cambia el color de fondo del texto seleccionado */
-    color: white; /* Cambia el color del texto seleccionado */
+    background-color: #ffa500; 
+    color: white; 
 }
 
 .flechitadatnext{
@@ -139,24 +128,22 @@
     -moz-appearance: none;
     appearance: none;
   
-    border: 2px solid #ccc; /* Borde del checkbox */
-    border-radius: 4px; /* Borde redondeado */
-    outline: none; /* Quita el contorno al seleccionar */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el checkbox */
+    border: 2px solid #ccc; 
+    border-radius: 4px; 
+    outline: none; 
+    cursor: pointer; 
 }
 
-/* Estilo del checkbox cuando está marcado */
 .checkbox:checked {
-    background-color: gray; /* Cambia el color de fondo cuando está marcado */
-    border-color:#ffa500;/* Cambia el color del borde cuando está marcado */
+    background-color: gray; 
+    border-color:#ffa500;
 }
 
-/* Estilo del chulo (tick) cuando está marcado */
 .checkbox:checked::after {
-    content: '\2714'; /* Código Unicode para el tick */
-    font-size: 30px; /* Tamaño del tick */
+    content: '\2714'; 
+    font-size: 30px;
     margin-left: 5px;
-    color: #ffa500; /* Color del tick */
+    color: #ffa500; 
 }
 
   label a {

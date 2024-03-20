@@ -15,6 +15,21 @@ export async function fetchPersona(doctype, docNumber) {
         
     }
 }
+export async function fetchFacilityImage(location) {
+    const facilityParam = location.pathname.split('/').pop();
+    try {
+      const response = await fetch(`http://localhost:8080/getFacility/${facilityParam}`);
+      const data = await response.json();
+      if (response.ok) {
+        const imageUrl = `data:image/jpeg;base64,${data[0].datosImagen}`;
+        return { imageUrl, facility: facilityParam };
+      } else {
+        throw new Error(`Error al obtener la imagen de la instalación: ${data.error}`);
+      }
+    } catch (error) {
+      throw new Error(`Error al obtener la imagen de la instalación: ${error}`);
+    }
+  }
 
 export async function fetchRegistro(doctype, docNumber, email, name) {
     try {
@@ -39,5 +54,7 @@ export async function fetchRegistro(doctype, docNumber, email, name) {
     } catch (error) {
         throw new Error('Error al realizar la solicitud: ' + error.message);
     }
+
+    
 }
 

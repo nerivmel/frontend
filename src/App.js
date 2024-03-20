@@ -2,12 +2,15 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Documentos from './Components/Documentos/Documentos';
 import Datos from './Components/Datos/Datos';
 import Lector from './Components/Lector/Lector';
+import Inicio from './Components/Inicio/Inicio';
 
 function App() {
-
   return (
     <Router>
       <Routes>
+        <Route path='/inicioArkadia' exact element={<Inicio/>} />
+        <Route path='/inicioFontanar' exact element={<Inicio/>} />
+        <Route path='/inicioMolinos' exact element={<Inicio/>}/>
         <Route path="/" exact element={<Documentos/>} />
         <Route path='/fontanar' exact element={<Documentos/>} />
         <Route path='/arkadia' exact element={<Documentos/>} />

@@ -1,0 +1,23 @@
+.wrapper0{
+    padding: 30px;
+    width: 420px;
+    height: 100vh;
+    background-image: url("../../../public/images/inicio.png");
+    background-color: #18304c;
+    background-size: 420px 450px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.inicioImg {
+
+    width: 250px; 
+   
+  }
+  .img-container{
+    margin-top: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
