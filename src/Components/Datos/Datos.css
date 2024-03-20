@@ -45,7 +45,7 @@
 }
 
 .inputname::placeholder {
-    color: white;
+    color: #69757b;
 }
 .inputname,
 .inputemail{

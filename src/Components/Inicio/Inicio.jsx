@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; // Importamos useNavigate
+import { useLocation, useNavigate } from 'react-router-dom'; 
 import './Inicio.css';
 import { fetchFacilityImage } from '../../api/api';
 
 const Inicio = () => {
     const location = useLocation(); 
-    const navigate = useNavigate(); // Usamos useNavigate para obtener la función de navegación
+    const navigate = useNavigate(); 
     const [imageUrl, setImageUrl] = useState('');
     const [facility, setFacility] = useState('');
   
@@ -15,7 +15,6 @@ const Inicio = () => {
           const { imageUrl, facility } = await fetchFacilityImage(location);
           setImageUrl(imageUrl);
           setFacility(facility);
-          console.log(facility);
         } catch (error) {
           console.error(error);
         }

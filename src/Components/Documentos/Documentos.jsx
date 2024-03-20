@@ -51,7 +51,6 @@ const Documentos = () => {
                 const queryParams = new URLSearchParams();
                 queryParams.append('name', encryptedName);
                 queryParams.append('email', encryptedEmail);
-    
                 let targetPath = '';
                 switch (window.location.pathname) {
                     case '/arkadia':
