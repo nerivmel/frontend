@@ -7,12 +7,18 @@ import { fetchFacilityImage } from "../../api/api";
 
 const Documentos = () => {
     
-    const [docTypeValue, setDocumentoValue] = useState('');
-    const [docNumberValue, setNumeroDocumentoValue] = useState('');
+    const [docTypeValue, setDocTypeValue] = useState('');
+    const [docNumberValue, setDocNumberValue] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
     const [facility, setFacility]=useState('');
+    const [inputError, setInputError] = useState(false); // Estado para controlar el error en el input
+    const [placeholder, setPlaceholder] = useState('Número de documento');
+    const [label, setLabel] = useState('Número de Documento');
+    const [inputType, setInputType] = useState('number');
+    const [error, setError] = useState('');
+    
 
     useEffect(() => {
         async function fetchData() {
@@ -28,21 +34,39 @@ const Documentos = () => {
       }, [location]);
 
     const handleDocumentoChange = (event) => {
-        setDocumentoValue(event.target.value);
+        const selectedDocType = event.target.value;
+        setDocTypeValue(selectedDocType);
+        if (selectedDocType === 'NIT') {
+            setPlaceholder('Nro Identificación tributaria');
+            setLabel('NIT Sin digito verificación');
+
+        } else {
+            setPlaceholder('Número de documento');
+            setLabel('Número de Documento');
+        }
+        if (selectedDocType === 'PASAPORTE'){
+            setInputType('text');
+        }
+        else{
+            setInputType('number');
+        }
     };
 
     const handleNumeroDocumentoChange = (event) => {
-        setNumeroDocumentoValue(event.target.value);
+        setDocNumberValue(event.target.value);
+        setError('');
     };
 
     const handleNextClick = async (e) => {
         e.preventDefault();
     
         if (docNumberValue.trim() === '' || docTypeValue.trim() === '') {
-            alert('Por favor, ingrese un tipo y número de documento');
+            setError('Campo obligatorio');
+            setInputError(true);
             return;
         }
-    
+        setInputError(false); 
+
         try {
             const data = await fetchPersona(docTypeValue, docNumberValue);
             if (data) {
@@ -108,11 +132,13 @@ const Documentos = () => {
                             <option value="DOCUMENTO EXTRANJERO">DOCUMENTO EXTRANJERO</option>
                             <option value="PASAPORTE">PASAPORTE</option>
                             <option value="TARJETA DE IDENTIDAD">TARJETA DE IDENTIDAD</option>
+                            <option value="NIT">NIT</option>
                         </select>
                     </div>
-                    <label className="labeldoc" htmlFor="Numero de documento">Número de Documento</label>
+                    <label className="labeldoc" htmlFor="Numero de documento">{label}</label>
                     <div className="input-box">
-                        <input type="text" value={docNumberValue} onChange={handleNumeroDocumentoChange} placeholder="número de documento" required />
+                        <input type={inputType} value={docNumberValue} onChange={handleNumeroDocumentoChange} placeholder={placeholder} required />
+                        {error && <span className="error-message-doc">{error}</span>}
                     </div>
                 </div>
                 <button type="submit" className="siguiente0" onClick={handleNextClick}>

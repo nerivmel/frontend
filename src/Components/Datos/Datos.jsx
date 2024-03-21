@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchRegistro } from "../../api/api";
 import './Datos.css';
 import CryptoJS from 'crypto-js'; 
+import CheckboxesTerminos from "./CheckboxesTerminos";
 
 const Datos = () => {
     const location = useLocation();
@@ -11,7 +12,8 @@ const Datos = () => {
     const [nombreValue, setNombreValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [emailError, setEmailError] = useState('');
-    const [isChecked, setIsChecked] = useState(false); 
+    const [isChecked1, setIsChecked1] = useState(false); 
+    const [isChecked2, setIsChecked2] = useState(false); 
 
     const desencriptarTexto = (textoEncriptado) => {
         const textoDesencriptado = CryptoJS.AES.decrypt(textoEncriptado, 'secret key').toString(CryptoJS.enc.Utf8);
@@ -28,7 +30,6 @@ const Datos = () => {
                 if (nombre && email) {
                     const nombreDesencriptado = desencriptarTexto(nombre);
                     const emailDesencriptado = desencriptarTexto(email);
-
                     const nombreTransformado = transformarNombre(nombreDesencriptado);
                     const emailTransformado = transformarEmail(emailDesencriptado);
                     setNombreValue(nombreTransformado);
@@ -83,8 +84,12 @@ const Datos = () => {
         return regexEmail.test(email);
     };
 
-    const handleCheckboxChange = () => {
-        setIsChecked(!isChecked); 
+    const handleCheckbox1Change = () => {
+        setIsChecked1(!isChecked1); 
+    };
+
+    const handleCheckbox2Change = () => {
+        setIsChecked2(!isChecked2); 
     };
 
     const handleTerminosClick = (e) => {
@@ -138,30 +143,27 @@ const Datos = () => {
     return (
         <div className="wrapper2">
             <form className="formDtos" onSubmit={handleNextClick}>
-                <label className="labelname" htmlFor="Nombre">Nombre o Razón Social</label>
-                <div className="input-box-name">
-                    <input className="inputname" type="text" value={nombreValue} onChange={handleNombreChange} placeholder="Nombre completo" required />
-                </div>
-                <label className="labelemail" htmlFor="Correo">E-mail</label>
-                <div className="input-box-email">
-                    <input className="inputemail" type="email" value={emailValue} onChange={handleEmailChange} placeholder="Correo Electronico" required />
-                    {emailError && <div className="error-message">{emailError}</div>}
-                </div>
-                <div className="terminus"> 
-                    <div className="checkbox-label">
-                        <input className="checkbox" type="checkbox" id="terminos" name="terminos" checked={isChecked} onChange={handleCheckboxChange} required/>
-                       <label htmlFor="terminos">
-                            <a href="https://terminosycondicionesdeusoejemplo.com/" onClick={handleTerminosClick}>
-                                Aceptar política de <br />tratamiento de datos
-                            </a>
-                        </label>
+                <div className="formDtos-container">
+                    <label className="labelname" htmlFor="Nombre">Nombre o Razón Social</label>
+                    <div className="input-box-name">
+                        <input className="inputname" type="text" value={nombreValue} onChange={handleNombreChange} placeholder="Nombre o Razón social" required />
+                    </div>
+                    <label className="labelemail" htmlFor="Correo">E-mail</label>
+                    <div className="input-box-email">
+                        <input className="inputemail" type="email" value={emailValue} onChange={handleEmailChange} placeholder="Correo Electronico" required />
+                        {emailError && <div className="error-message">{emailError}</div>}
                     </div>
                 </div>
+
+                <CheckboxesTerminos isChecked1={isChecked1} isChecked2={isChecked2} 
+                                    handleCheckbox1Change={handleCheckbox1Change} 
+                                    handleCheckbox2Change={handleCheckbox2Change}
+                                    handleTerminosClick={handleTerminosClick} /> 
                 <div className="botones">
                     <button className="atras" onClick={handleBackClick}>
                         <img src="./images/flechitaback.png" alt="" className="flechitaAtras"/>
                     </button>
-                    {isChecked && (
+                    {(isChecked1 || isChecked2) && ( 
                         <button type="submit" className="siguiente0" onClick={handleNextClick}>
                             <img src="./images/flechitanext.png" alt="img-siguiente" className="flechitadatnext" />
                         </button>
@@ -172,4 +174,4 @@ const Datos = () => {
     );
 };
 
-export default Datos;
+export default Datos
